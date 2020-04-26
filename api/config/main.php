@@ -45,6 +45,10 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/user']],
             ],
         ],
+        'jwt' => [
+            'class' => \sizeg\jwt\Jwt::class,
+            'key' => 'atupuertaapi', // Change this for production enviroment
+        ],
     ],
     'params' => $params,
     'defaultRoute' => 'api/index',
