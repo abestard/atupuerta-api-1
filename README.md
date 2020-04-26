@@ -1,60 +1,99 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Advanced Project Template</h1>
-    <br>
-</p>
+# ATuPuerta API
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+Created with: Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) 
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+# INSTALLATION
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+1. Clone repo
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
-
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.com/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.com/yiisoft/yii2-app-advanced)
-
-DIRECTORY STRUCTURE
--------------------
-
+```bash
+$ git clone https://github.com/ATuPuerta/atupuerta-api.git/
 ```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes    
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
+
+2. Install dependencies
+
+```bash
+$ composer install
 ```
+
+3. Init enviroment
+
+```bash
+$ php init
+```
+
+Select enviroment for development or production.
+
+4. Config file `common\main-local.php` adn setup database
+
+```php
+<?php
+
+return [
+    'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=yourserver;dbname=yourdbname',
+            'username' => 'yourusername',
+            'password' => 'yourpassword',
+            'charset' => 'utf8',
+        ],
+
+        ...
+    ],
+];
+```
+
+5. Run migrations
+
+```bash
+$ php yii migrate
+```
+
+Select yes to apply migrations
+
+6. Run local server
+
+```bash
+$ php yii serve -t api/web/
+```
+
+Server run at localhost:8080 by default, use -p options to change port
+
+# API Endpoints
+
+`GET` / : Return api name and las api version (v1)
+
+`POST` /v1/login : Send in request body username and password. Return jwt access token.
+
+This endpoints require jwt access token in Authorization header, authentication method Bearer Token
+---
+
+`GET` /v1/users : Return all registered users
+
+`POST` /v1/users : Create user , require request body with username, password and email.
+
+`GET` /v1/users/:id : Return user by id
+
+`GET` /v1/users/:id?fields=username,email : Return specific fields of an user by id.
+
+`GET` /v1/users/:id?expand=created_at : Return extra fields
+
+Example:
+
+`GET` http://localhost:8080/v1/users/1?fields=username,email&expand=created_at
+
+return
+
+```json
+{
+    "username": "admin",
+    "email": "admin@example.com",
+    "created_at": 1587932567
+}
+```
+
+`PUT` /v1/users/:id : Update user data, require request body. NOTE: Password can not be update with this endpoint.
+`DELETE` /v1/users/:id : Delete user.
+
+### NOTE: ATUPUERTA API IS IN CONSTRUCTION ;)
