@@ -11,6 +11,20 @@ class UserController extends \yii\rest\ActiveController
 {
     public $modelClass = User::class;
 
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['authenticator'] = [
+            'class' => \sizeg\jwt\JwtHttpBearerAuth::class,
+            'optional' => [
+                'create',
+            ],
+        ];
+
+        return $behaviors;
+    }
+
     // Override create action
     public function actions()
     {
