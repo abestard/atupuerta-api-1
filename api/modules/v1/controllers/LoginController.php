@@ -74,6 +74,7 @@ class LoginController extends Controller
         ;
 
         return $this->asJson([
+            'userId' => $user->id,
             'token' => (string) $token,
         ]);
     }
