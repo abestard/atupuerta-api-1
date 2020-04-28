@@ -31,7 +31,15 @@ class UserController extends \api\common\controllers\ActiveController
         $actions = parent::actions();
 
         // disable default create action
-        unset($actions['create']);
+        unset($actions['create'], $actions['update']);
+
+        $actions['update']
+        = [
+            'class' => 'yii\rest\UpdateAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+            'scenario' => $this->updateScenario,
+        ];
 
         return $actions;
     }
