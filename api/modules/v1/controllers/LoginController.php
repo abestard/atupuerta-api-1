@@ -78,6 +78,7 @@ class LoginController extends \api\common\controllers\RestController
         return $this->asJson([
             'userId' => $user->id,
             'token' => (string) $token,
+            'expiration' => $token->getClaim('exp'),
         ]);
     }
 
