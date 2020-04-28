@@ -39,7 +39,6 @@
 
 /**
  * @OA\Get(path="/v1/foods",
- *   security={{"token": {}}},
  *   summary="Get foods",
  *   tags={"foods"},
  *   @OA\Parameter(
@@ -107,7 +106,6 @@ function get()
 
 /**
  * @OA\Get(path="/v1/foods/{id}",
- *   security={{"token": {}}},
  *   summary="Get food by id",
  *   tags={"foods"},
  *   @OA\Parameter(

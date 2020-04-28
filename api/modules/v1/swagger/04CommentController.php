@@ -37,7 +37,6 @@
 
 /**
  * @OA\Get(path="/v1/comments",
- *   security={{"token": {}}},
  *   summary="Get comments",
  *   tags={"comments"},
  *   @OA\Parameter(
@@ -105,7 +104,6 @@ function get()
 
 /**
  * @OA\Get(path="/v1/comments/{id}",
- *   security={{"token": {}}},
  *   summary="Get comment by id",
  *   tags={"comments"},
  *   @OA\Parameter(
