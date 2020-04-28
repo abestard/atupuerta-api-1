@@ -7,6 +7,20 @@ use Yii;
 use yii\web\Response;
 use yii\web\ServerErrorHttpException;
 
+/**
+ * @OA\Get(path="/v1/users",
+ *   summary="Get users",
+ *   tags={"users"},
+ *   @OA\Response(
+ *     response=200,
+ *     description="Return all users",
+ *   ),
+ *   @OA\Response(
+ *     response=401,
+ *     description="Unauthorized response",
+ *   ),
+ * )
+ */
 class UserController extends \yii\rest\ActiveController
 {
     public $modelClass = User::class;
