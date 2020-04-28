@@ -60,28 +60,34 @@ $ php yii serve -t api/web/
 
 Server run at localhost:8080 by default, use -p options to change port
 
-# API Endpoints
+# API Swagger
+/api/docs
 
-`GET` / : Return api name and las api version (v1)
+# API Swagger JSON
+/api/api-json
 
-`POST` /v1/login : Send in request body username and password. Return jwt access token.
+# API Endpoints Examples
+
+`GET` `/` : Return api name and las api version (v1)
+
+`POST` `/v1/login` : Send in request body username and password. Return jwt access token.
 
 This endpoints require jwt access token in Authorization header, authentication method Bearer Token
 ---
 
-`GET` /v1/users : Return all registered users
+`GET` `/v1/users` : Return all registered users
 
-`POST` /v1/users : Create user , require request body with username, password and email.
+`POST` `/v1/users` : Create user , require request body with username, password and email.
 
-`GET` /v1/users/:id : Return user by id
+`GET` `/v1/users/:id` : Return user by id
 
-`GET` /v1/users/:id?fields=username,email : Return specific fields of an user by id.
+`GET` `/v1/users/:id?fields=username,email` : Return specific fields of an user by id.
 
-`GET` /v1/users/:id?expand=created_at : Return extra fields
+`GET` `/v1/users/:id?expand=created_at` : Return extra fields
 
 Example:
 
-`GET` http://localhost:8080/v1/users/1?fields=username,email&expand=created_at
+`GET` `http://localhost:8080/v1/users/1?fields=username,email&expand=created_at`
 
 return
 
@@ -93,7 +99,8 @@ return
 }
 ```
 
-`PUT` /v1/users/:id : Update user data, require request body. NOTE: Password can not be update with this endpoint.
-`DELETE` /v1/users/:id : Delete user.
+`PUT` `/v1/users/:id` : Update user data, require request body. NOTE: Password can not be update with this endpoint.
+
+`DELETE` `/v1/users/:id` : Delete user.
 
 ### NOTE: ATUPUERTA API IS IN CONSTRUCTION ;)

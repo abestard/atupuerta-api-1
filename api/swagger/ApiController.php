@@ -25,6 +25,6 @@
  *   ),
  * )
  */
-function generateSwagger()
+function get()
 {
 }

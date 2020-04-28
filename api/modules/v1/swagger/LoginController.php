@@ -6,15 +6,17 @@
  *   tags={"login"},
  *   @OA\RequestBody(
  *          required=true,
- *          @OA\JsonContent(ref="#/components/schemas/LoginRequest")
+ *          @OA\JsonContent(ref="#/components/schemas/LoginRequest", example={"username": "testuser", "password": "1234pass"})
  *   ),
  *   @OA\Response(
  *     response=200,
  *     description="Return user id and token",
- *     @OA\MediaType(
- *           mediaType="application/json",
- *           @OA\Schema(ref="#/components/schemas/LoginResponse"),
- *     ),
+ *     @OA\JsonContent(ref="#/components/schemas/LoginRequest", example={
+ *              "userId": 2,
+ *              "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODgwNTkxNTAsImV4cCI6MTU4ODA2Mjc1MCwidSI6ImFkbWluIiwicCI6IjEyMzQ1In0.7WG7NOr-z0FZzOpMlQDJeuxrW-hcM_pIgGCxMY5keiU",
+ *              "expiration": 1588062750
+ *          }
+ *      )
  *   ),
  *   @OA\Response(
  *     response=401,
@@ -26,7 +28,7 @@
  *   ),
  * )
  */
-function generateSwagger()
+function post()
 {
 }
 
@@ -49,7 +51,7 @@ class LoginRequest
      *
      * @var string
      */
-    private $username;
+    private $username = 'testuser';
 
     /**
      * @OA\Property(
