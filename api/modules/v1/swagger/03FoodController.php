@@ -1,24 +1,31 @@
 <?php
 
  /**
-  * @OA\Post(path="/v1/users",
-  *   summary="Create user",
-  *   tags={"users"},
+  * @OA\Post(path="/v1/foods",
+  *   security={{"token": {}}},
+  *   summary="Create food",
+  *   tags={"foods"},
   *   @OA\RequestBody(
   *          required=true,
-  *          @OA\JsonContent(ref="#/components/schemas/UserSchema", example={"username": "testuser", "password": "12345", "email":"testuser@example.com"})
+  *          @OA\JsonContent(ref="#/components/schemas/FoodSchema", example={
+  *           "title": "Pollo",
+  *           "description": "Pollo asado ",
+  *           "price": 5,
+  *           "moneyType": "CUC",
+  *           "created_by": 2
+  *           })
   *   ),
   *   @OA\Response(
   *     response=200,
-  *     description="Return user created",
-  *     @OA\JsonContent(ref="#/components/schemas/UserSchema", example={
-  *         "id": 14,
-  *         "username": "testuser",
-  *         "email": "testuser@example.com",
-  *         "phone_number": null,
-  *         "movil_number": null,
-  *         "is_provider": null
-  *       })
+  *     description="Return food created",
+  *     @OA\JsonContent(ref="#/components/schemas/FoodSchema", example={
+  *           "id": 1,
+  *           "title": "Pollo",
+  *           "description": "Pollo asado ",
+  *           "price": 5,
+  *           "moneyType": "CUC",
+  *           "created_by": 2
+  *      })
   *   ),
   *   @OA\Response(
   *     response=422,
@@ -31,10 +38,10 @@
  }
 
 /**
- * @OA\Get(path="/v1/users",
+ * @OA\Get(path="/v1/foods",
  *   security={{"token": {}}},
- *   summary="Get users",
- *   tags={"users"},
+ *   summary="Get foods",
+ *   tags={"foods"},
  *   @OA\Parameter(
  *     name="fields",
  *     in="query",
@@ -82,10 +89,10 @@
  *   ),
  *   @OA\Response(
  *     response=200,
- *     description="Return all users",
+ *     description="Return all foods",
  *     @OA\MediaType(
  *           mediaType="application/json",
- *           @OA\Schema(ref="#/components/schemas/UserSchema"),
+ *           @OA\Schema(ref="#/components/schemas/FoodSchema"),
  *     ),
  *   ),
  *   @OA\Response(
@@ -99,15 +106,15 @@ function get()
 }
 
 /**
- * @OA\Get(path="/v1/users/{id}",
+ * @OA\Get(path="/v1/foods/{id}",
  *   security={{"token": {}}},
- *   summary="Get user by id",
- *   tags={"users"},
+ *   summary="Get food by id",
+ *   tags={"foods"},
  *   @OA\Parameter(
  *     name="id",
  *     in="path",
  *     required=true,
- *     description="User Id",
+ *     description="Food Id",
  *     @OA\Schema(
  *       type="integer"
  *     )
@@ -133,15 +140,15 @@ function get()
  *
  *   @OA\Response(
  *     response=200,
- *     description="Return user by id",
- *     @OA\JsonContent(ref="#/components/schemas/UserSchema", example={
- *         "id": 14,
- *         "username": "testuser",
- *         "email": "testuser@example.com",
- *         "phone_number": null,
- *         "movil_number": null,
- *         "is_provider": null
- *       })
+ *     description="Return food by id",
+ *     @OA\JsonContent(ref="#/components/schemas/FoodSchema", example={
+ *           "id": 1,
+ *           "title": "Pollo",
+ *           "description": "Pollo asado ",
+ *           "price": 5,
+ *           "moneyType": "CUC",
+ *           "created_by": 2
+ *     })
  *   ),
  *   @OA\Response(
  *     response=404,
@@ -164,27 +171,40 @@ function getId()
 }
 
   /**
-   * @OA\Put(path="/v1/users/{id}",
-   *   summary="Update user",
+   * @OA\Put(path="/v1/foods/{id}",
+   *   summary="Update food",
    *   security={{"token": {}}},
-   *   tags={"users"},
+   *   tags={"foods"},
    *   @OA\RequestBody(
    *          required=true,
-   *          @OA\JsonContent(ref="#/components/schemas/UserSchema", example={"username": "testuser_updated", "email":"newtestuser@example.com","phone_number": "55555559", "movil_number": "+53 55555551", "is_provider": true})
+   *          @OA\JsonContent(ref="#/components/schemas/FoodSchema", example={
+   *           "title": "Pollo",
+   *           "description": "Pollo asado ",
+   *           "price": 5,
+   *           "moneyType": "CUC",
+   *           "created_by": 2
+   *           })
    *   ),
    *   @OA\Parameter(
    *     name="id",
    *     in="path",
    *     required=true,
-   *     description="User Id",
+   *     description="Food Id",
    *     @OA\Schema(
    *       type="integer"
    *     )
    *   ),
    *   @OA\Response(
    *     response=200,
-   *     description="Return user updated",
-   *     @OA\JsonContent(ref="#/components/schemas/UserSchema", example={"username": "testuser_updated", "email":"newtestuser@example.com","phone_number": "55555559", "movil_number": "+53 55555551", "is_provider": true})
+   *     description="Return food updated",
+   *     @OA\JsonContent(ref="#/components/schemas/FoodSchema", example={
+   *           "id": 1,
+   *           "title": "Pollo",
+   *           "description": "Pollo asado ",
+   *           "price": 5,
+   *           "moneyType": "CUC",
+   *           "created_by": 2
+   *       })
    *   ),
    *   @OA\Response(
    *     response=404,
@@ -207,22 +227,22 @@ function getId()
   }
 
   /**
-   * @OA\Delete(path="/v1/users/{id}",
-   *   summary="Delete user",
+   * @OA\Delete(path="/v1/foods/{id}",
+   *   summary="Delete food",
    *   security={{"token": {}}},
-   *   tags={"users"},
+   *   tags={"foods"},
    *   @OA\Parameter(
    *     name="id",
    *     in="path",
    *     required=true,
-   *     description="User Id",
+   *     description="Food Id",
    *     @OA\Schema(
    *       type="integer"
    *     )
    *   ),
    *   @OA\Response(
    *     response=204,
-   *     description="Undocumented (user has deleted)",
+   *     description="Undocumented (food has deleted)",
    *   ),
    *   @OA\Response(
    *     response=404,
@@ -244,22 +264,21 @@ function getId()
 
 /**
  * @OA\Schema(
- *     title="UserSchema",
+ *     title="FoodSchema",
  *     @OA\Xml(
- *         name="UserSchema"
+ *         name="FoodSchema"
  *     ),
- *     required={"username", "password"}
  * )
  */
-class UserSchema
+class FoodSchema
 {
     /**
      * @OA\Property(
      * )
      *
-     * @var string
+     * @var int
      */
-    private $username;
+    private $id;
 
     /**
      * @OA\Property(
@@ -267,7 +286,7 @@ class UserSchema
      *
      * @var string
      */
-    private $password;
+    private $title;
 
     /**
      * @OA\Property(
@@ -275,7 +294,15 @@ class UserSchema
      *
      * @var string
      */
-    private $email;
+    private $description;
+
+    /**
+     * @OA\Property(
+     * )
+     *
+     * @var float
+     */
+    private $price;
 
     /**
      * @OA\Property(
@@ -283,21 +310,13 @@ class UserSchema
      *
      * @var string
      */
-    private $phone_number;
+    private $moneyType;
 
     /**
      * @OA\Property(
      * )
      *
-     * @var string
+     * @var int
      */
-    private $movil_number;
-
-    /**
-     * @OA\Property(
-     * )
-     *
-     * @var bool
-     */
-    private $is_provider;
+    private $created_by;
 }
