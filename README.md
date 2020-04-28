@@ -1,8 +1,6 @@
-# ATuPuerta API
+## ATuPuerta API 
 
-Created with: Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) 
-
-# INSTALLATION
+## INSTALLATION
 
 1. Clone repo
 
@@ -60,13 +58,13 @@ $ php yii serve -t api/web/
 
 Server run at localhost:8080 by default, use -p options to change port
 
-# API Swagger
+## API Swagger
 /api/docs
 
-# API Swagger JSON
+## API Swagger JSON
 /api/api-json
 
-# API Endpoints Examples
+## API Endpoints Examples
 
 `GET` `/` : Return api name and las api version (v1)
 
@@ -103,4 +101,4 @@ return
 
 `DELETE` `/v1/users/:id` : Delete user.
 
-### NOTE: ATUPUERTA API IS IN CONSTRUCTION ;)
+###### NOTE: ATUPUERTA API IS IN CONSTRUCTION ;)
