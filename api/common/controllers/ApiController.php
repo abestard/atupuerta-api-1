@@ -15,6 +15,15 @@ use yii\rest\Controller;
  *   title="ATuPuerta API",
  *   description="Server - ATuPuerta app API",
  * ),
+ *
+ * @OA\SecurityScheme(
+ *   securityScheme="token",
+ *   type="http",
+ *   scheme="bearer",
+ *   bearerFormat="JWT",
+ *   name="Authorization Token",
+ *   in="header"
+ * )
  */
 class ApiController extends Controller
 {

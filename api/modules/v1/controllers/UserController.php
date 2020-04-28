@@ -9,6 +9,7 @@ use yii\web\ServerErrorHttpException;
 
 /**
  * @OA\Get(path="/v1/users",
+ *   security={{"token": {}}},
  *   summary="Get users",
  *   tags={"users"},
  *   @OA\Response(
