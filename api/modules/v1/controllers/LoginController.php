@@ -41,6 +41,15 @@ class LoginController extends Controller
      *   ),
      * )
      */
+    public function behaviors()
+    {
+        return [
+            'corsFilter' => [
+                'class' => \yii\filters\Cors::className(),
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $body = Yii::$app->getRequest()->getBodyParams();

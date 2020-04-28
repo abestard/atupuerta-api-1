@@ -34,6 +34,15 @@ class ApiController extends Controller
      *   ),
      * )
      */
+    public function behaviors()
+    {
+        return [
+            'corsFilter' => [
+                'class' => \yii\filters\Cors::className(),
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         return $this->asJson([
