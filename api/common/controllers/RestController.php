@@ -8,8 +8,6 @@ class RestController extends \yii\rest\Controller
     {
         $behaviors = parent::behaviors();
 
-        $behaviors['corsFilter'] = ['class' => \yii\filters\Cors::className()];
-
-        return $behaviors;
+        return array_merge($behaviors, ['corsFilter' => ['class' => \yii\filters\Cors::className()]]);
     }
 }
