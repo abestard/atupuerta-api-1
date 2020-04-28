@@ -8,41 +8,8 @@ use yii\rest\Controller;
 /**
  * Api controller.
  */
-
-/**
- * @OA\Info(
- *   version="1.0",
- *   title="ATuPuerta API",
- *   description="Server - ATuPuerta app API",
- * ),
- *
- * @OA\SecurityScheme(
- *   securityScheme="token",
- *   type="http",
- *   scheme="bearer",
- *   bearerFormat="JWT",
- *   name="Authorization Token",
- *   in="header"
- * )
- */
 class ApiController extends Controller
 {
-    /**
-     * Default Index.
-     *
-     * @return mixed
-     */
-
-    /**
-     * @OA\Get(path="/",
-     *   summary="API Info",
-     *   tags={"default"},
-     *   @OA\Response(
-     *     response=200,
-     *     description="Return API info",
-     *   ),
-     * )
-     */
     public function behaviors()
     {
         return [
@@ -52,6 +19,11 @@ class ApiController extends Controller
         ];
     }
 
+    /**
+     * Default Index.
+     *
+     * @return mixed
+     */
     public function actionIndex()
     {
         return $this->asJson([
@@ -70,9 +42,8 @@ class ApiController extends Controller
             'api-json' => [
                 'class' => 'genxoft\swagger\JsonAction',
                 'dirs' => [
-                    Yii::getAlias('@api/controllers'),
-                    Yii::getAlias('@api/modules/v1/controllers'),
-                    Yii::getAlias('@api/modules/v1/models'),
+                    Yii::getAlias('@api/swagger'),
+                    Yii::getAlias('@api/modules/v1/swagger'),
                 ],
             ],
         ];
