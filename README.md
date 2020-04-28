@@ -1,4 +1,4 @@
-### ATuPuerta API 
+# ATuPuerta API 
 
 ### INSTALLATION
 
@@ -70,8 +70,7 @@ Server run at localhost:8080 by default, use -p options to change port
 
 `POST` `/v1/login` : Send in request body username and password. Return jwt access token.
 
-This endpoints require jwt access token in Authorization header, authentication method Bearer Token
----
+###### This endpoints require jwt access token in Authorization header, authentication method Bearer Token
 
 `GET` `/v1/users` : Return all registered users
 
