@@ -3,19 +3,36 @@
 namespace api\modules\v1\models;
 
 use OutOfBoundsException;
+use yii\behaviors\TimestampBehavior;
 
 class User extends \api\common\models\User
 {
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        $b = parent::behaviors();
+
+        return array_merge($b, [
+            TimestampBehavior::className(),
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
-        return [
+        $rules = parent::rules();
+
+        array_merge($rules, [
             [['username', 'email'], 'required'],
             ['status', 'default', 'value' => parent::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-        ];
+        ]);
+
+        return $rules;
     }
 
     /**
