@@ -13,7 +13,7 @@ class CommentController extends \api\common\controllers\ActiveController
         $behaviors['authenticator'] = [
             'class' => \sizeg\jwt\JwtHttpBearerAuth::class,
             'optional' => [
-                'create',
+                'index', 'view',
             ],
         ];
 
