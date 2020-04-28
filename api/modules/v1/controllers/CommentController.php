@@ -2,9 +2,7 @@
 
 namespace api\modules\v1\controllers;
 
-use yii\rest\ActiveController;
-
-class CommentController extends ActiveController
+class CommentController extends \api\common\controllers\ActiveController
 {
     public $modelClass = 'api\modules\v1\models\Comment';
 }

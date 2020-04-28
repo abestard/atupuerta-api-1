@@ -22,7 +22,7 @@ use yii\web\ServerErrorHttpException;
  *   ),
  * )
  */
-class UserController extends \yii\rest\ActiveController
+class UserController extends \api\common\controllers\ActiveController
 {
     public $modelClass = User::class;
 

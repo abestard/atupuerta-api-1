@@ -9,7 +9,7 @@ use yii\rest\Controller;
 /**
  * Login controller for the `v1` module.
  */
-class LoginController extends Controller
+class LoginController extends \api\common\controllers\RestController
 {
     /**
      * Login action.
@@ -41,15 +41,6 @@ class LoginController extends Controller
      *   ),
      * )
      */
-    public function behaviors()
-    {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
-        ];
-    }
-
     public function actionIndex()
     {
         $body = Yii::$app->getRequest()->getBodyParams();

@@ -13,7 +13,7 @@ return [
     'id' => 'app-api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'api\common\controllers',
+    'controllerNamespace' => 'api\controllers',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-api',
