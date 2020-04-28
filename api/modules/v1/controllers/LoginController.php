@@ -4,7 +4,6 @@ namespace api\modules\v1\controllers;
 
 use api\modules\v1\models\User;
 use Yii;
-use yii\rest\Controller;
 
 /**
  * Login controller for the `v1` module.
@@ -42,8 +41,6 @@ class LoginController extends \api\common\controllers\RestController
         $password = $body['password'];
 
         $user = User::findByUsername($username);
-
-        Yii::debug($user);
 
         if (!$user || !$user->validatePassword($password)) {
             Yii::$app->response->statusCode = 401;
@@ -88,8 +85,7 @@ class LoginController extends \api\common\controllers\RestController
     protected function verbs()
     {
         $verbs = parent::verbs();
-
-        $verbs['index'] = ['POST'];
+        $verbs['index'] = ['post', 'options'];
 
         return $verbs;
     }
