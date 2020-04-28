@@ -4,7 +4,7 @@ namespace api\modules\v1\models;
 
 use OutOfBoundsException;
 
-class User extends \common\models\User
+class User extends \api\common\models\User
 {
     /**
      * {@inheritdoc}
