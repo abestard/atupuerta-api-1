@@ -40,7 +40,7 @@ class User extends \api\common\models\User
      */
     public function fields()
     {
-        return ['id', 'username', 'email', 'phone_number', 'movil_number', 'is_provider'];
+        return ['id'];
     }
 
     /**
@@ -48,7 +48,7 @@ class User extends \api\common\models\User
      */
     public function extraFields()
     {
-        return ['created_at', 'updated_at', 'status'];
+        return ['username', 'email', 'phone_number', 'movil_number', 'is_provider', 'created_at', 'updated_at', 'status'];
     }
 
     /**
