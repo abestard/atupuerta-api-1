@@ -11,11 +11,11 @@ class User extends \common\models\User
      */
     public function rules()
     {
-        $rules = parent::rules();
-
-        array_push($rules, [['username', 'email'], 'required']);
-
-        return $rules;
+        return [
+            [['username', 'email'], 'required'],
+            ['status', 'default', 'value' => parent::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+        ];
     }
 
     /**

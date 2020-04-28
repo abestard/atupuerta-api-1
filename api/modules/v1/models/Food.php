@@ -22,4 +22,19 @@ class Food extends \common\models\Post
 
         return $query->andWhere(['category' => 'food']);
     }
+
+    public function fields()
+    {
+        return ['id', 'title', 'description', 'price', 'moneyType', 'created_by'];
+    }
+
+    public function extraFields()
+    {
+        return ['created_at', 'updated_at', 'category', 'comments', 'createdBy'];
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
 }

@@ -2,23 +2,23 @@
 
 namespace common\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%post}}".
  *
- * @property int $id
- * @property string|null $title
- * @property string|null $imageUrl
- * @property float|null $price
- * @property string|null $moneyType
- * @property string|null $description
- * @property int|null $created_by
- * @property int|null $created_at
- * @property int|null $updated_at
- *
- * @property Comment[] $comments
- * @property User $createdBy
+ * @property int         $id
+ * @property string      $title
+ * @property null|string $imageUrl
+ * @property null|float  $price
+ * @property null|string $moneyType
+ * @property string      $description
+ * @property int         $created_by
+ * @property int         $created_at
+ * @property int         $updated_at
+ * @property string      $category
+ * @property Comment[]   $comments
+ * @property User        $createdBy
  */
 class Post extends \yii\db\ActiveRecord
 {
@@ -33,13 +33,24 @@ class Post extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
+            [['title', 'description', 'created_by'], 'required'],
             [['price'], 'number'],
             [['description'], 'string'],
             [['created_by', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'imageUrl', 'moneyType'], 'string', 'max' => 255],
+            [['title', 'imageUrl', 'moneyType', 'category'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
@@ -59,13 +70,14 @@ class Post extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'category' => 'Category',
         ];
     }
 
     /**
      * Gets query for [[Comments]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\CommentQuery
+     * @return \common\models\query\CommentQuery|\yii\db\ActiveQuery
      */
     public function getComments()
     {
@@ -75,7 +87,7 @@ class Post extends \yii\db\ActiveRecord
     /**
      * Gets query for [[CreatedBy]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\UserQuery
+     * @return \common\models\query\UserQuery|\yii\db\ActiveQuery
      */
     public function getCreatedBy()
     {
@@ -84,7 +96,8 @@ class Post extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return \common\models\query\PostQuery the active query used by this AR class.
+     *
+     * @return \common\models\query\PostQuery the active query used by this AR class
      */
     public static function find()
     {

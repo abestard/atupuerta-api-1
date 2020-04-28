@@ -2,21 +2,20 @@
 
 namespace common\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%comment}}".
  *
- * @property int $id
- * @property int|null $start
- * @property int|null $created_by
- * @property int|null $post_id
- * @property string|null $text
- * @property int|null $created_at
- * @property int|null $updated_at
- *
- * @property Post $post
- * @property User $createdBy
+ * @property int    $id
+ * @property int    $start
+ * @property int    $created_by
+ * @property int    $post_id
+ * @property string $text
+ * @property int    $created_at
+ * @property int    $updated_at
+ * @property Post   $post
+ * @property User   $createdBy
  */
 class Comment extends \yii\db\ActiveRecord
 {
@@ -31,9 +30,20 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
+            [['start', 'created_by', 'post_id', 'text'], 'required'],
             [['start', 'created_by', 'post_id', 'created_at', 'updated_at'], 'integer'],
             [['text'], 'string'],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['post_id' => 'id']],
@@ -60,7 +70,7 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Post]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\PostQuery
+     * @return \common\models\query\PostQuery|\yii\db\ActiveQuery
      */
     public function getPost()
     {
@@ -70,7 +80,7 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * Gets query for [[CreatedBy]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\UserQuery
+     * @return \common\models\query\UserQuery|\yii\db\ActiveQuery
      */
     public function getCreatedBy()
     {
@@ -79,7 +89,8 @@ class Comment extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return \common\models\query\CommentQuery the active query used by this AR class.
+     *
+     * @return \common\models\query\CommentQuery the active query used by this AR class
      */
     public static function find()
     {
