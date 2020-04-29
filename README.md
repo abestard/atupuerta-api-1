@@ -22,7 +22,7 @@ $ php init
 
 Select enviroment for development or production.
 
-4. Config file `common\main-local.php` adn setup database
+4. Config file `common\main-local.php` adn setup database 
 
 ```php
 <?php
